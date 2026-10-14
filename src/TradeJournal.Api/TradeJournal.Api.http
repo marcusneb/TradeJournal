@@ -1,6 +1,26 @@
-@TradeJournal.Api_HostAddress = http://localhost:5196
+@baseUrl = http://localhost:5196
 
-GET {{TradeJournal.Api_HostAddress}}/weatherforecast/
-Accept: application/json
 
-###
+### Register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test123!"
+}
+
+### Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Test123!"
+}
+
+> {% client.global.set("token", response.body.accessToken); %}
+
+### Who am I (protected)
+GET {{baseUrl}}/api/me
+//Authorization: Bearer {{token}}
